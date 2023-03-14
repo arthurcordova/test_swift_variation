@@ -10,8 +10,9 @@ import Alamofire
 import Combine
 import Charts
 
-class ViewController: UIViewController, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, ChartViewDelegate {
     
+    @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var tableView: UITableView!
     private var bindings = Set<AnyCancellable>()
     private var items = [VariationItem]()
@@ -26,6 +27,10 @@ class ViewController: UIViewController, UITableViewDelegate {
         viewModel.fetchData()
         bindViewModelToView()
         
+    }
+    
+    private func setUpChart() {
+        self.lineChartView.delegate = self
     }
     
     private func setUpTable() {
